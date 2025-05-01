@@ -1,0 +1,23 @@
+name: deploment test
+
+on:
+  workflow_dispatch:
+    inputs:
+      version: 
+        type: string
+        default: 'none'
+        description: package version
+      test:
+        type: boolean
+        default: false
+        description: A pointless checkbox.
+  push: 
+    branches:
+      - main
+jobs:
+  wait:
+    name: Run Api
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Api ${{inputs.version}}
+      run: sleep 30 
