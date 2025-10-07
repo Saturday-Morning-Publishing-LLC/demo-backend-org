@@ -15,5 +15,6 @@
     "tslib": "^2.3.0"
   },
   "sideEffects": false,
-  "@test/models": "new_value"
+  "@test/models": "new_value",
+  "peerDependencies.@test/models": "I Love Sheryll"
 }
