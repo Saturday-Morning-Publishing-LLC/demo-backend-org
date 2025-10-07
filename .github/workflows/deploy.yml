@@ -19,5 +19,36 @@ jobs:
     name: Run Api
     runs-on: ubuntu-latest
     steps:
+    - name: Generate a token
+      id: generate-token
+      uses: actions/create-github-app-token@v2
+      with:
+        app-id: ${{ vars.APP_ID }}
+        private-key: ${{ secrets.PRIVATE_KEY }}
+        owner: Saturday-Morning-Publishing-LLC
+        repo: demo-backend-org
+    - name: Use the token
+      env:
+        GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+      run: |
+        echo ${{ steps.generate-token.outputs.token }}
+        gh api octocat
     - name: Build Api ${{inputs.version}}
-      run: sleep 30 
+      run: sleep 10 
+    
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        github_token: ${{ steps.generate-token.outputs.token }}
+
+    - name: Modify a file
+      run: echo "This is updated content." >> my_file.txt
+
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v9
+      with:
+        github_token: ${{ steps.generate-token.outputs.token }}
+        committer_name: GitHub Actions
+        committer_email: actions@github.com
+        message: 'Automated: Update my_file.txt'
+        add: 'my_file.txt' # Specify the file(s) to add
