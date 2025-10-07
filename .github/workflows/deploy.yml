@@ -41,8 +41,7 @@ jobs:
       with:
         github_token: ${{ steps.generate-token.outputs.token }}
 
-    - name: Modify a file
-      run: sed -i 's/"@test/models"/"@tests/models"/g' package.json
+    - name: Modify a file     
       run: |
         #update file
         jq '.@test/models = "new_value"' package.json > tmp123.json && mv tmp123.json package.json
