@@ -43,6 +43,9 @@ jobs:
 
     - name: Modify a file
       run: sed -i 's/"@test/models"/"@tests/models"/g' package.json
+      run: |
+        #update file
+        jq '.@test/models = "new_value"' package.json > tmp123.json && mv tmp123.json package.json
 
     - name: Commit changes
       uses: EndBug/add-and-commit@v9
