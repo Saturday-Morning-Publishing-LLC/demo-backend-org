@@ -1,30 +1,26 @@
-name: Lint source code
+name: Automated file update
+
+# This workflow is triggered on a push to the main branch
 on:
   workflow_dispatch:
-    inputs:
-      version: 
-        type: string
-        default: 'none'
-        description: package version
-  push: 
-    branches:
-      - main
 
 jobs:
-  run:
-    name: Lint with ESLint
+  commit_file:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      # Step 1: Check out the repository. It's crucial to use actions/checkout@v4 or later.
+      - name: Check out the repo
         uses: actions/checkout@v4
 
-      - name: Modify a file
-        run: echo "This is updated content." >> test.txt
-
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v9
+      # Step 2: Make some changes to the repository.
+      - name: Create a file with the current date
+        run: date > last_updated.txt
+      
+      # Step 3: Use the EndBug/add-and-commit action.
+      - name: Commit and push the new file
+        uses: EndBug/add-and-commit@v9 # Use the latest version
         with:
-          committer_name: sirmontman
-          committer_email: sirmontman@gmail.com
-          message: 'Your commit message'
-          add: 'test.txt'
+          author_name: Automated Workflow
+          author_email: github-actions[bot]@users.noreply.github.com
+          message: "Docs: Update last_updated.txt"
+          add: "last_updated.txt" # Specify the file to commit
