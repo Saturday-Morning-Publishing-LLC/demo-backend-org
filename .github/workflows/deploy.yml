@@ -51,4 +51,5 @@ jobs:
         committer_name: GitHub Actions
         committer_email: actions@github.com
         message: 'Automated: Update my_file.txt'
+        push: true
         add: 'my_file.txt' # Specify the file(s) to add
