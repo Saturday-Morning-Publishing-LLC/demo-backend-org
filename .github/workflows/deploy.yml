@@ -47,7 +47,7 @@ jobs:
     - name: Commit changes
       uses: EndBug/add-and-commit@v9
       with:
-        github_token: ${{ steps.generate-token.outputs.token }}
+        token: ${{ steps.generate-token.outputs.token }}
         committer_name: GitHub Actions
         committer_email: actions@github.com
         message: 'Automated: Update my_file.txt'
