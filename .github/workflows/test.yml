@@ -18,10 +18,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Modify a file
+        run: echo "This is updated content." >> test.txt
+
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
           author_name: Your Name
           author_email: mail@example.com
           message: 'Your commit message'
-          add: 'test.js'
+          add: 'test.txt'
