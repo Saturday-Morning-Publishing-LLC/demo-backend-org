@@ -44,7 +44,7 @@ jobs:
     - name: Modify a file     
       run: |
         #update file
-        jq '.["peerDependencies.@test/models"] = "I Love Sheryll"' package.json > tmp123.json && mv tmp123.json package.json
+        jq '.["peerDependencies"]["@test/models"] = "I Love Sheryll"' package.json > tmp123.json && mv tmp123.json package.json
 
     - name: Commit changes
       uses: EndBug/add-and-commit@v9
