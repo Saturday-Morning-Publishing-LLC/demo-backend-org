@@ -1,5 +1,14 @@
 name: Lint source code
-on: push
+on:
+  workflow_dispatch:
+    inputs:
+      version: 
+        type: string
+        default: 'none'
+        description: package version
+  push: 
+    branches:
+      - main
 
 jobs:
   run:
