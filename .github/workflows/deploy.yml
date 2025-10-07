@@ -20,13 +20,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Build Api ${{inputs.version}}
-      run: sleep 30 
+      run: sleep 10 
     
     - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Modify a file
-      run: echo "This is updated content." >> package.json
+      run: echo "This is updated content."
     
     - name: Commit changes
       uses: EndBug/add-and-commit@v9
