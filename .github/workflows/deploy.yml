@@ -19,6 +19,15 @@ jobs:
     name: Run Api
     runs-on: ubuntu-latest
     steps:
+    - name: Generate UUID
+      id: generate_uuid # Assign an ID to the step to access its output
+      run: |
+        echo "::set-output name=uuid::$(uuidgen)"
+
+    - name: Use UUID
+      run: |
+        echo "Generated UUID: ${{ steps.generate_uuid.outputs.uuid }}"
+        
     - name: Generate a token
       id: generate-token
       uses: actions/create-github-app-token@v2
@@ -44,7 +53,7 @@ jobs:
     - name: Modify a file     
       run: |
         #update file
-        jq '.["peerDependencies"]["@test/models"] = "${{inputs.version}}"' package.json > tmp123.json && mv tmp123.json package.json
+        jq '.["peerDependencies"]["@test/models"] = "${{inputs.version}}"' package.json > ${{steps.generate_uuid.outputs.uuid}}.json && mv ${{steps.generate_uuid.outputs.uuid}}.json package.json
 
     - name: Commit changes
       uses: EndBug/add-and-commit@v9
