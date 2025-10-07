@@ -42,12 +42,12 @@ jobs:
         github_token: ${{ steps.generate-token.outputs.token }}
 
     - name: Modify a file
-      run: echo "This is updated content." >> my_file.txt
+      run: sed -i 's/"@test/models"/"@tests/models"/g' package.json
 
     - name: Commit changes
       uses: EndBug/add-and-commit@v9
       with:
         token: ${{ steps.generate-token.outputs.token }}
-        message: 'Automated: Update my_file.txt'
+        message: 'Automated: Update package.json'
         push: true
-        add: 'my_file.txt' # Specify the file(s) to add
+        add: 'package.json' # Specify the file(s) to add
