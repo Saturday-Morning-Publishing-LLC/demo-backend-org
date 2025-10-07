@@ -38,6 +38,8 @@ jobs:
     
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        github_token: ${{ steps.generate-token.outputs.token }}
 
     - name: Modify a file
       run: echo "This is updated content." >> my_file.txt
