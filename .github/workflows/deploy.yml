@@ -21,3 +21,17 @@ jobs:
     steps:
     - name: Build Api ${{inputs.version}}
       run: sleep 30 
+    
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Modify a file
+      run: echo "This is updated content." >> package.json
+    
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v9
+      with:
+        author_name: GitHub Actions Bot
+        author_email: github-actions[bot]@users.noreply.github.com
+        message: 'Automated: Update package.json'
+        add: 'package.json' # Specify the file(s) to add
